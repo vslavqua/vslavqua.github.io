@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Prologue by HTML5 UP</title>
+		<title>Infrastructure Automation with Docker and Ansible</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -28,9 +28,9 @@
 					<!-- Nav -->
 						<nav id="nav">
 							<ul>
-								<li><a href="#top" id="top-link"><span class="icon solid fa-home">Intro</span></a></li>
-								<li><a href="#portfolio" id="portfolio-link"><span class="icon solid fa-th">Portfolio</span></a></li>
-								<li><a href="#about" id="about-link"><span class="icon solid fa-user">About Me</span></a></li>
+								<li><a href="#top" id="top-link"><span class="icon solid fa-home">Home</span></a></li>
+								<li><a href="#portfolio" id="portfolio-link"><span class="icon solid fa-th">Intro</span></a></li>
+								<li><a href="#about" id="about-link"><span class="icon solid fa-user">Infrastructure Overview</span></a></li>
 								<li><a href="#contact" id="contact-link"><span class="icon solid fa-envelope">Contact</span></a></li>
 							</ul>
 						</nav>
@@ -60,33 +60,34 @@
 						<div class="container">
 
 							<header>
-								<h2 class="alt">Hi! I'm <strong>Prologue</strong>, a <a href="http://html5up.net/license">free</a> responsive<br />
-								site template designed by <a href="http://html5up.net">HTML5 UP</a>.</h2>
-								<p>Ligula scelerisque justo sem accumsan diam quis<br />
-								vitae natoque dictum sollicitudin elementum.</p>
+								<h2 class="alt">Infrastructure Automation with Docker and Ansible</h2>
+								<p>This documentation describes how to fully automate a test 
+									infrastructure with five Linux containers using Docker and Ansible. 
+									The setup includes local NTP servers per datacenter and Zabbix Agent2 
+									for monitoring, while accessing external repositories through a proxy server.</p>
 							</header>
 
 							<footer>
-								<a href="#portfolio" class="button scrolly">Magna Aliquam</a>
+								<a href="#portfolio" class="button scrolly">Introduction</a>
 							</footer>
 
 						</div>
 					</section>
 
-				<!-- Portfolio -->
+				<!-- Introduction -->
 					<section id="portfolio" class="two">
 						<div class="container">
 
 							<header>
-								<h2>Portfolio</h2>
+								<h2>Introduction</h2>
 							</header>
 
-							<p>Vitae natoque dictum etiam semper magnis enim feugiat convallis convallis
-							egestas rhoncus ridiculus in quis risus amet curabitur tempor orci penatibus.
-							Tellus erat mauris ipsum fermentum etiam vivamus eget. Nunc nibh morbi quis
-							fusce hendrerit lacus ridiculus.</p>
+							<p style="text-align: left;">The purpose of this project is to automate the deployment and 
+								configuration of a Linux-based infrastructure that simulates 
+								two datacenters (AAA and ZZZ). Each datacenter includes local 
+								NTP servers and monitored hosts using Zabbix Agent2.</p>
 
-							<div class="row">
+							<!-- <div class="row">
 								<div class="col-4 col-12-mobile">
 									<article class="item">
 										<a href="#" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
@@ -129,27 +130,112 @@
 										</header>
 									</article>
 								</div>
-							</div>
+							</div> -->
 
 						</div>
 					</section>
 
-				<!-- About Me -->
+				<!-- Infrastructure Overview -->
 					<section id="about" class="three">
 						<div class="container">
 
 							<header>
-								<h2>About Me</h2>
+								<h2>Infrastructure Overview</h2>
 							</header>
 
-							<a href="#" class="image featured"><img src="images/pic08.jpg" alt="" /></a>
+							    <section>
+      <h3>📌 Project Structure</h3>
+      <pre style="text-align: left;"><code>├── Project_A/                # Ansible configuration
+│   ├── ansible.cfg
+│   ├── inventory.yml
+│   ├── playbook.yml
+│   ├── group_vars/
+│   │   └── all.yml
+│   └── templates/
+│       ├── chrony.conf.j2
+│       └── zabbix_agent2.conf.j2
+│
+├── Project_D/                # Docker infrastructure
+│   ├── docker-compose.yml
+│   ├── squid.conf
+│   ├── ntp/
+│   │   ├── chrony-aaa.conf
+│   │   └── chrony-zzz.conf
+│   └── host/
+│       ├── Dockerfile
+│       └── entrypoint.sh</code></pre>
+    </section>
 
-							<p>Tincidunt eu elit diam magnis pretium accumsan etiam id urna. Ridiculus
+<ul data-spread="false"  style="text-align: left;">
+    <li>
+        <span><strong>Datacenter AAA</strong>:</span>
+        <ul data-spread="false">
+            <li>
+                <code><span>hostname1</span></code><span>, </span><code><span>hostname4</span></code>
+            </li>
+            <li>
+                <span>NTP server: </span><code><span>ntp-aaa</span></code>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <span><strong>Datacenter ZZZ</strong>:</span>
+        <ul data-spread="false">
+            <li>
+                <code><span>hostname2</span></code><span>, </span><code><span>hostname3</span></code><span>, </span><code><span>hostname5</span></code>
+            </li>
+            <li>
+                <span>NTP server: </span><code><span>ntp-zzz</span></code>
+            </li>
+        </ul>
+    </li>
+</ul>
+<p style="text-align: left;">
+    <span>All containers are launched via Docker Compose. Network access is restricted and internet is accessed via a Squid proxy container.</span>
+</p>
+
+    <section style="text-align: left;">
+      <h3>🧩 Infrastructure Diagram</h3>
+      <img src="A_network_diagram_in_the_image_illustrates_an_infr.png" alt="Infrastructure Diagram" style="width:100%; max-width:800px">
+    </section>
+
+    <section style="text-align: left;">
+      <h3>🚀 Setup Instructions</h3>
+      <ol>
+        <li>Ensure <strong>Docker</strong>, <strong>Docker Compose</strong> and <strong>Ansible</strong> are installed</li>
+        <li>Clone the repository:
+          <pre><code>git clone https://github.com/vslavqua/homework.git
+cd homework/Project_D</code></pre>
+        </li>
+        <li>Start the environment:
+          <pre><code>docker compose up -d</code></pre>
+        </li>
+        <li>Check containers:
+          <pre><code>docker ps</code></pre>
+        </li>
+        <li>Run the playbook:
+          <pre><code>../Project_A/ansible-playbook -i inventory.yml playbook.yml</code></pre>
+        </li>
+      </ol>
+    </section>
+
+    <section style="text-align: left;">
+      <h3>✅ Tests</h3>
+      <ul>
+        <li><strong>chrony</strong> installed on hostname[1-5] only</li>
+        <li><strong>zabbix-agent2</strong> installed only on hostname[1-5]</li>
+        <li>Each host uses correct NTP server based on DC group</li>
+        <li>User <code>ansible</code> has sudo privileges</li>
+        <li>Zabbix configuration file rendered correctly</li>
+      </ul>
+    </section>
+
+							<!-- <p style="text-align: left;">Tincidunt eu elit diam magnis pretium accumsan etiam id urna. Ridiculus
 							ultricies curae quis et rhoncus velit. Lobortis elementum aliquet nec vitae
 							laoreet eget cubilia quam non etiam odio tincidunt montes. Elementum sem
 							parturient nulla quam placerat viverra mauris non cum elit tempus ullamcorper
 							dolor. Libero rutrum ut lacinia donec curae mus vel quisque sociis nec
-							ornare iaculis.</p>
+							ornare iaculis.</p> -->
 
 						</div>
 					</section>
@@ -162,10 +248,10 @@
 								<h2>Contact</h2>
 							</header>
 
-							<p>Elementum sem parturient nulla quam placerat viverra
+							<!-- <p>Elementum sem parturient nulla quam placerat viverra
 							mauris non cum elit tempus ullamcorper dolor. Libero rutrum ut lacinia
 							donec curae mus. Eleifend id porttitor ac ultricies lobortis sem nunc
-							orci ridiculus faucibus a consectetur. Porttitor curae mauris urna mi dolor.</p>
+							orci ridiculus faucibus a consectetur. Porttitor curae mauris urna mi dolor.</p> -->
 
 							<form method="post" action="#">
 								<div class="row">
